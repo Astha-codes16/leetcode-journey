@@ -1,1 +1,10 @@
-
+https://leetcode.com/problems/combination-sum-iii/submissions/1677483766
+//my approach
+Basic backtracking question (take and not take approach) take and element explore its possibilities modifying n and k accordingly 
+then pop the element(i.e dont take it) and now explore further for further elements (skipping the index we already explored for!!) 
+    if(i>=v.size())
+    {
+        return;
+    }
+this line is to handle the edge case where k=9 and n is more than the total sum 
+when we backtrack from the last step and i=8 and we make a call for i+1 (i.e) 9 which is an invalid index   
