@@ -6,7 +6,7 @@ Welcome to my personal DSA journey!
 I'm solving **100 LeetCode questions** with full understanding and custom explanations.
 
 ## 🔢 Progress
-- ✅ Completed: 58/100 questions
+- ✅ Completed: 59/100 questions
 - 🔄 Currently Working On: Sliding Window, Linked Lists, Trees
 
 ## 🧠 Folder Structure
