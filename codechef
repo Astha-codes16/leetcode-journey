@@ -163,3 +163,216 @@ int main() {
     return 0;
 }
 
+contest 199 ques 3
+
+Fence Colouring
+You have 
+N
+N fences, and you want to colour them. You have 
+N
+N total types of colours numbered 
+1
+,
+2
+,
+…
+,
+N
+1,2,…,N.
+
+Currently, all the 
+N
+N fences are coloured with the type 
+1
+1 colour. At the end, you want the 
+i
+i-th fence to have a colour of 
+A
+i
+A 
+i
+​
+  for every 
+1
+≤
+i
+≤
+N
+1≤i≤N.
+
+You can choose to do one of the following at each minute:
+
+Colour all 
+N
+N fences at the same time with type 
+X
+X colour, where you can choose 
+X
+(
+1
+≤
+X
+≤
+N
+)
+X(1≤X≤N).
+Colour a specific fence 
+i
+i with type 
+X
+X colour, where you can choose 
+X
+(
+1
+≤
+X
+≤
+N
+)
+X(1≤X≤N).
+Both of the above operations take only 
+1
+1 minute to perform. What is the minimum number of minutes needed to colour the entire fence as desired.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of multiple lines of input.
+The first line of each test case contains 
+N
+N - the number of fences.
+The second line contains 
+N
+N integers - 
+A
+1
+,
+A
+2
+,
+…
+,
+A
+N
+A 
+1
+​
+ ,A 
+2
+​
+ ,…,A 
+N
+​
+ .
+Output Format
+For each test case, output on a new line the minimum time needed to colour all 
+N
+N fences.
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int T;
+	cin>>T;
+	
+	while(T--)
+	{
+	    int N;
+	    cin>>N;
+	    unordered_map<int,int>mpp;
+	    int otherval=0;
+	    int ans=0;
+	    vector<int>A(N);
+	    for(int i=0;i<N;i++)
+	    {
+	        cin>>A[i];
+	    }
+	    for(int i=0;i<N;i++)
+	    {
+	        mpp[A[i]]++;
+	    }
+	    int maxval=INT_MIN;
+	    int keyWithMaxValue = -1;
+	    for(auto it:mpp)
+	    {
+	        if(it.second>maxval)
+	        {
+	            maxval=it.second;
+	            keyWithMaxValue=it.first;
+	        }
+	    }
+	    if(maxval==mpp[1])
+	    {
+	        ans= N-maxval;
+	    }
+	    else if( keyWithMaxValue!=1 && maxval>1)
+	    {
+	        otherval=N-maxval;
+	        ans=1+otherval;
+	    }
+	    else if(keyWithMaxValue==1  && maxval>1)
+	    {
+	        otherval=N-maxval;
+	        ans=otherval;
+	    }
+	    else if(maxval==1)
+	    {
+	        if (mpp.find(1) != mpp.end())
+	        {
+	            ans=N-1;
+	        }
+	        else
+	        {
+	            ans=N;
+	        }
+	    }
+	    
+	    cout<<ans<<endl;
+	    
+	    
+	    
+	}
+
+}
+
+
+OPTIMISED SOLUTION
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int N;
+        cin >> N;
+        unordered_map<int, int> mpp;
+        vector<int> A(N);
+        for (int i = 0; i < N; i++) {
+            cin >> A[i];
+            mpp[A[i]]++;
+        }
+
+        int maxval = INT_MIN;
+        for (auto it : mpp) {
+            maxval = max(maxval, it.second);
+        }
+
+        int count1 = mpp[1]; // how many already have color 1
+
+        // Option 1: paint all non-1 individually
+        int optionA = N - count1;
+
+        // Option 2: global paint to most frequent color, fix rest
+        int optionB = 1 + (N - maxval);
+
+        // Minimum of both options
+        int ans = min(optionA, optionB);
+
+        cout << ans << "\n";
+    }
+}
+
