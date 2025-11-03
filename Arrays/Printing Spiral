@@ -1,0 +1,72 @@
+https://leetcode.com/problems/spiral-matrix/submissions/1819579754
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int rows=matrix.size();
+        int cols=matrix[0].size();
+        //we consider 4 direction 
+        // direction 0 is from left to right
+        // direction 1 is from top to bottom
+        // direction 2 is from right to left
+        // direction 3 is from bottom to top
+        //we initialise top with the topmost row
+        //we initoalise bottom with the bottommost row
+        //we initialise left with the leftmost col
+        //we initialise right with the rightmost col
+        int top=0;
+        int bottom=rows-1;
+        int left=0;
+        int right=cols-1;
+        int dir=0;
+        vector<int>result;
+        while(top<=bottom && left<=right)
+        {
+            //dir=0
+            if(dir==0)
+            {
+                for(int i=left;i<=right;i++)
+                {
+                    result.push_back(matrix[top][i]);
+                }
+                //jo cheez constant hoti hai ussi ko hi hum change(inc ya dec karte hai)
+                top++;
+                dir++;
+            }
+           else if(dir==1)
+            {
+                for(int i=top;i<=bottom;i++)
+                {
+                    result.push_back(matrix[i][right]);
+                }
+                
+                right--;
+                dir++;
+            }
+             else  if(dir==2)
+            {
+                for(int i=right;i>=left;i--)
+                {
+                    result.push_back(matrix[bottom][i]);
+                }
+                
+                bottom--;
+                dir++;
+            }
+              else if(dir==3)
+            {
+                for(int i=bottom;i>=top;i--)
+                {
+                    result.push_back(matrix[i][left]);
+                }
+                
+                left++;
+                dir=0;
+            }
+
+            
+        }
+
+return result;
+    }
+};
