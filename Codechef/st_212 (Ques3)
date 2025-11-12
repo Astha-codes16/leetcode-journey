@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+    while(T--) {
+        int N;
+        cin >> N;
+        vector<int> A(N);  // Fixed vector declaration
+        int ans = 0;       // Added declaration for ans
+
+        for(int i = 0; i < N; i++) {
+            cin >> A[i];
+        }
+
+        for(int k = 0; k < N; k++) {
+            // Find the maximum value in the current array
+            int maxVal = A[0];
+            int maxIndex = 0;
+            for (int i = 0; i < A.size(); i++) {
+                if (A[i] > maxVal) {
+                    maxVal = A[i];
+                    maxIndex = i;
+                }
+            }
+
+            // Count people to the left and right
+            int left = maxIndex;
+            int right = A.size() - maxIndex - 1;
+            ans += min(left, right);
+
+            // Remove the person who left
+            A.erase(A.begin() + maxIndex);
+        }
+
+        cout << ans << endl;
+    }
+}
