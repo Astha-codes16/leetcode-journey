@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int N;
+        cin >> N;
+        vector<int> A(N);
+        int count1 = 0, count2 = 0, count3 = 0;
+
+        for (int i = 0; i < N; i++) {
+            cin >> A[i];
+            if (A[i] == 1) count1++;
+            else if (A[i] == 2) count2++;
+            else if (A[i] == 3) count3++;
+        }
+
+        // Minimum deletions
+        int deletions = min(count1, count3) + max(0, count2 - 1);
+        cout << deletions << endl;
+    }
+}
+
+****this one did not work****
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int N;
+        cin >> N;
+        vector<int> A(N);
+        for (int i = 0; i < N; i++) cin >> A[i];
+
+        vector<bool> deleted(N, false);
+        int count = 0;
+
+        for (int i = 0; i < N; i++) {
+            if (deleted[i]) continue;
+            for (int j = i + 1; j < N; j++) {
+                if (deleted[j]) continue;
+                if (A[i] + A[j] == 4) {
+                    deleted[j] = true; // mark instead of erase
+                    count++;
+                }
+            }
+        }
+
+        cout << count << endl;
+    }
+}
