@@ -1,0 +1,51 @@
+https://leetcode.com/problems/bag-of-tokens/submissions/1859021743
+class Solution {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int power) {
+       //power gawa ke score badha lo
+       //a=score gawa ke power badha lo
+       //while losing power we want to loose minimum power
+       //while gaining power we want to gain maximum power
+       //so we sort token array
+       sort(tokens.begin(),tokens.end());
+       int max_score=0;
+       int i=0;
+       int j=tokens.size()-1;
+       int score=0;
+       while(i<=j){
+       if(power>=tokens[i])
+       {
+        power-=tokens[i];
+        //power=100
+        //i=1
+        //score=1;
+        //max_score=1
+         //power=300
+        //i=2
+        //score=1;
+        //max_score=1
+        i++;
+        score++;
+        max_score=max(max_score,score);
+       }
+       else if(score>=1)
+       {
+        power+=tokens[j];
+        //power=500
+        //j=2
+        //score=0
+        //max=1;
+        j--;
+        score--;
+        max_score=max(max_score,score);
+       }
+       else
+       {
+        max_score=max(max_score,score);
+        break;
+       }
+       
+       }
+     return max_score;
+    }
+};
