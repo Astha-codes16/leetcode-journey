@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int T;
+	cin>>T;
+	while(T--)
+	{
+	    int N;
+	    int S;
+	    int maximum=0;
+	    cin>>N>>S;
+	    //n=maximum
+	    //s=total 
+	    for(int i=0;i<N;i++)
+	    {
+	        int j=S-i;
+	        if(j<=N && j>=0){
+	            maximum=max(maximum,j-i);
+	        }
+	    }
+	    cout<<maximum<<endl;
+	}
+
+}
