@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    // your code goes here
+    int T;
+    cin >> T;
+    while (T--)
+    {
+        int N;
+        cin >> N;
+        vector < int > A(N);
+        for (int i = 0; i < N; i++)
+        {
+            cin >> A[i];
+        }
+        //first we will find out th eminimum difference
+        int first_term = A[0];
+        int last_term = A[N - 1];
+        int i = 1;
+        int j = 2;
+        int d = A[1] - A[0];
+        while (j < N)
+        {   
+            d = gcd(d, (A[j] - A[i]));
+            j++;
+            i++;
+
+        }
+        
+        int no_of_terms = ((last_term - first_term) / d) + 1;
+        int terms_to_add = no_of_terms - N;
+        cout << terms_to_add << endl;
+
+    }
+}
