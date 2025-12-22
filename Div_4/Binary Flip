@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin >> T;
+    while (T--) {
+        int N;
+        cin >> N;
+
+        string S;
+        cin >> S;
+
+        int cnt00 = 0, cnt11 = 0;
+
+        // Count adjacent pairs
+        for (int i = 0; i < N - 1; i++) {
+            if (S[i] == S[i + 1]) {
+                if (S[i] == '0')
+                    cnt00++;
+                else
+                    cnt11++;
+            }
+        }
+        // cnt00 - cnt11 tells how much imbalance exists, and since one flip can fix at most 2 pairs, we need
+
+        // ⌈(𝑐𝑛𝑡
+        //     00−𝑐𝑛𝑡 11
+        // ) /
+        // 2⌉⌈(cnt00− cnt11) / 2⌉
+
+        // which is written in C++as(cnt00 - cnt11 + 1) / 2.
+        // Minimum flips required
+        if (cnt11 >= cnt00) {
+            cout << 0 << '\n';
+        } else {
+            cout << (cnt00 - cnt11 + 1) / 2 << '\n';
+        }
+    }
+
+    return 0;
+}
