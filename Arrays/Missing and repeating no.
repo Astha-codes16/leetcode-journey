@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        // code here
+        //sum of first n numbers gives-actual sum
+        //missing no. - rep no
+        //X-Y
+        //WE WILL ALSO FIND X^2-Y^2
+        //THEN WE WILL FIND THE VALUE OF X AND Y
+        int n=arr.size();
+        long long math_sum=(1LL*n*(n+1))/2;
+        long long ssq = (1LL*n * (n + 1) * (2 * n + 1)) / 6;
+        for(int i=0;i<arr.size();i++)
+        {
+            math_sum-=arr[i];
+            ssq-=(1LL*arr[i]*arr[i]);
+        }
+        //math_sum=X-Y
+        //ssq=X^2-Y^2
+        long long x_plus_y=ssq/math_sum;
+        long long missing=(x_plus_y+math_sum)/2;
+        long long rep_no=(x_plus_y-math_sum)/2;
+        return {rep_no,missing};
+        
+    }
+};
