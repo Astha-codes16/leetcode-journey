@@ -1,0 +1,62 @@
+class Solution {
+public:
+    int search(vector<int>& nums)
+    {
+       int low=0;
+       int high=nums.size()-1;
+       while(low<high)
+       {
+        //we need to skip duplicates at any cost.....
+        //eg.. 1,1,1,2,1,1
+        //eg.. 1,1,1,0,1,1
+        while((low<high) && (nums[low]==nums[low+1]))
+        {
+            low++;
+        }
+           while((low<high) && (nums[high]==nums[high-1]))
+        {
+            high--;
+        }
+        int mid=(low+high)/2;
+        if(nums[mid]>nums[high])
+        {
+            low=mid+1;
+        }
+        else
+        {
+            high=mid;
+        }
+       }
+       //this is the index of mid element;
+       return low;
+    }
+    bool bs(int low,int high,int target,vector<int>& nums)
+    { 
+        bool ans = false;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(nums[mid]>target)
+            {
+                high=mid-1;
+            }
+            else if(nums[mid]<target)
+            {
+                low=mid+1;
+            }
+            else if(nums[mid]==target)
+            {
+               ans=true;
+               break;
+            }
+        }
+        return ans;
+    }
+    bool search(vector<int>& nums, int target) {
+      int n=nums.size()-1;
+      int mid=search(nums);
+      bool first= bs(0,mid-1,target,nums);
+      bool second= bs(mid,n,target,nums);
+      return (first || second);
+    }
+};
