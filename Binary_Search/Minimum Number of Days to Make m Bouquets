@@ -1,0 +1,69 @@
+class Solution {
+public:
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        long long maxi=0;
+        long long size=bloomDay.size();
+        long long ans=-1;
+        for(int i=0;i<size;i++)
+        {
+            if(bloomDay[i]>maxi)
+            {
+                maxi=bloomDay[i];
+            }
+        }
+        long long low=1;
+        long long high=maxi;
+        
+        while(low<=high)
+        {   long long flowers=0;
+            long long mid=(low+high)/2;
+            //flowers bloomed
+            long long adj = 0, currLen = 0;
+
+for (int x : bloomDay) {
+    if(k==1)
+    {
+     if (x <= mid) {
+        flowers++;
+    }
+    }
+    else
+     {
+        if (x <= mid) {
+        currLen++;
+        adj = max(adj, currLen);
+        
+    } else {
+        if(adj>=k)
+        {   long long n=adj/k;
+            long long f=n*k;
+            flowers=flowers+f;
+           
+        }
+        currLen = 0;
+         adj=0;
+    }
+
+    }
+    
+}
+    if(adj>=k)
+    { 
+        long long n=adj/k;
+            long long f=n*k;
+            flowers=flowers+f;
+    }
+if(flowers>=1LL * k * m)
+{
+    ans=mid;
+    high=mid-1;
+}
+else
+{
+    low=mid+1;
+}
+            
+    }
+    return ans;
+}
+};
